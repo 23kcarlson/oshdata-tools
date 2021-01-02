@@ -121,6 +121,6 @@ for url in project_page_urls:
 
 
 with open('oshwa_scrape_' + str(date.today()) + '.csv', 'w',encoding="utf-8") as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f,quoting=csv.QUOTE_ALL)
     for row in project_data:
         writer.writerow(row)
