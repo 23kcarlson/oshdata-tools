@@ -120,7 +120,7 @@ for url in project_page_urls:
         print(project_fields[2] + " added")
 
 
-with open('oshwa_scrape_' + str(date.today()) + '.csv', 'w') as f:
+with open('oshwa_scrape_' + str(date.today()) + '.csv', 'w',encoding="utf-8") as f:
     writer = csv.writer(f)
     for row in project_data:
         writer.writerow(row)
