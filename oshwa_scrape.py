@@ -80,7 +80,7 @@ def getResponseCode(doc_url): #Define how to probe the URL and handle errors
     except socket.timeout as e4:
         return 'Timed Out'
 
-for url in project_page_urls:
+for i,url in enumerate(project_page_urls):
     project_fields = []
     project_page = request.urlopen(url)
     project_page_soup = bs(project_page, "html.parser").find('section', class_='page-section')
@@ -118,6 +118,7 @@ for url in project_page_urls:
         print(project_fields[2] + " added" + " | Doc Status = " + str(project_fields[13]))
     else:
         print(project_fields[2] + " added")
+    print("{}%".format(round(i/len(project_list)*100,2)),end="\r",flush=True) 
 
 
 with open('oshwa_scrape_' + str(date.today()) + '.csv', 'w',encoding="utf-8") as f:
