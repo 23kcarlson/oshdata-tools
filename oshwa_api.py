@@ -12,7 +12,11 @@ headers = {
 }
 
 response = requests.request("GET", url, headers=headers, data=payload)
-
-pdObj = pd.read_json(response.content, orient='records')
-csvData = pdObj.to_csv('oshwa_api_' + str(date.today()) + '.csv', index=False)
-print("Write successful")
+if(response.status_code == 200):
+    pdObj = pd.read_json(response.content, orient='records')
+    csvData = pdObj.to_csv('oshwa_api_' + str(date.today()) + '.csv', index=False)
+    print("Write successful")
+elif(response.status_code == 401):
+    print("Invalid API key")
+else:
+    print("Unknown error. Response code: " + response.status_code)
