@@ -5,12 +5,13 @@ import pandas as pd
 
 url = "https://certificationapi.oshwa.org/api/projects"
 
+f = open("apiKey.txt", "r")
 payload = {}
 headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer <token>'
+    'Authorization': ('Bearer '+f.readline())
 }
-
+f.close() 
 response = requests.request("GET", url, headers=headers, data=payload)
 if(response.status_code == 200):
     pdObj = pd.read_json(response.content, orient='records')
